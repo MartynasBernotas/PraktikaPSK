@@ -56,4 +56,15 @@ public class ArtistController {
             return Response.status(Response.Status.CONFLICT).build();
         }
     }
+
+    @Path("")
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response insert(ArtistDto artistData) {
+        Artist artistToCreate = new Artist();
+        artistToCreate.setName(artistData.getName());
+        artistDAO.persist(artistToCreate);
+            return Response.ok().build();
+    }
 }

@@ -20,6 +20,10 @@ import java.util.Objects;
 @Setter
 public class Song implements Serializable {
 
+    @Version
+    @Column(name = "OPT_LOCK_VERSION")
+    private Integer version;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)

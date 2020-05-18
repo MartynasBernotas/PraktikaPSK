@@ -17,7 +17,7 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="lt.vu.mybatis.dao" targetProject="MAVEN" />
 
         <table schema="public" tableName="artist">
-            <generatedKey column="id" identity="true" sqlStatement="JDBC" />
+            <generatedKey sqlStatement="JDBC" identity="true" column="id" />
         </table>
         <table schema="public" tableName="album">
             <generatedKey column="id" identity="true" sqlStatement="JDBC" />

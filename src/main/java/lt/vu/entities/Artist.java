@@ -20,7 +20,6 @@ public class Artist implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", updatable = false, nullable = false)
     private Integer id;
 
     @Size(max = 100)
@@ -41,9 +40,8 @@ public class Artist implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Artist player = (Artist) o;
-        return Objects.equals(id, player.id) &&
-                Objects.equals(name, player.name);
+        Artist artist = (Artist) o;
+        return Objects.equals(name, artist.name);
     }
 
     @Override

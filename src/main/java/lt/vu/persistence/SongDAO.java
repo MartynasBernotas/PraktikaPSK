@@ -5,6 +5,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.List;
+import javax.persistence.LockModeType;
 
 @ApplicationScoped
 public class SongDAO {
@@ -27,4 +28,6 @@ public class SongDAO {
     public List<Song> loadAll() {
         return em.createNamedQuery("Song.findAll", Song.class).getResultList();
     }
+
+
 }

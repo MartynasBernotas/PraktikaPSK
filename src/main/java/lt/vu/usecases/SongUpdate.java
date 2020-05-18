@@ -14,13 +14,18 @@ import lt.vu.persistence.SongDAO;
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
+import javax.persistence.OptimisticLockException;
 import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-@Model
+@ViewScoped
+@Named
+@Getter @Setter
 public class SongUpdate implements Serializable {
 
     @Inject
@@ -53,6 +58,7 @@ public class SongUpdate implements Serializable {
     private List<lt.vu.mybatis.model.Style> styleListFree;
 
     @PostConstruct
+    @LoggedInvocation
     public void init(){
         Map<String, String> requestParameters =
                 FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
@@ -82,7 +88,11 @@ public class SongUpdate implements Serializable {
     @Transactional
     @LoggedInvocation
     public String updateSongLink() {
+        try {
         songsDao.update(this.song);
+        }catch (OptimisticLockException e) {
+            return "/song.xhtml?faces-redirect=true&songId=" + this.song.getId() + "&error=optimistic-lock-exception";
+        }
         return "song.xhtml?songId=" + this.song.getId() + "&faces-redirect=true";
     }
 }

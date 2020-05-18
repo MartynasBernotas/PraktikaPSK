@@ -23,7 +23,13 @@
         <h:commandButton value="update" action="#{songUpdate.updateSongLink()}">
             <f:param name="songId" value="#{songUpdate.song.id}" />
         </h:commandButton>
-    </h:form><br/>
+        <h:outputText value="Link was updated by another user moments ago. please refresh and try again" rendered="#{param['error'] == 'optimistic-lock-exception'}" />
+    </h:form><h:form>
+    <h:outputText value="#{checkIfSongExists.checkingStatus}" />
+    <h:commandButton value="Check song link in databse" disabled="#{checkIfSongExists.taskRunning}" action="#{checkIfSongExists.checkIfExists()}">
+        <f:param name="songId" value="#{songUpdate.song.id}" />
+    </h:commandButton>
+</h:form><br/>
     <h:form>
         <h:outputText value="Add style :"/>
         <h:selectOneMenu value="#{songUpdate.style}" converter="omnifaces.SelectItemsConverter">
