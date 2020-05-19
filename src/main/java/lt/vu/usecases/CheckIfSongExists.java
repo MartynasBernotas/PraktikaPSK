@@ -3,7 +3,7 @@ package lt.vu.usecases;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.interceptors.LoggedInvocation;
-import lt.vu.services.SongsDatabaseTool;
+import lt.vu.services.ISongsDatabase;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -15,12 +15,12 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-@ViewScoped
+@SessionScoped
 @Named
 @Getter @Setter
 public class CheckIfSongExists implements Serializable {
     @Inject
-    SongsDatabaseTool songsDatabaseTool;
+    ISongsDatabase songsDatabaseTool;
 
     private CompletableFuture<Boolean> existenceTask = null;
 

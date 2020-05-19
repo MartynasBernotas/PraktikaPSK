@@ -8,7 +8,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 <h:head/>
 <h:body>
-    <a href="#{songUpdate.song.link}">Song #{songUpdate.song.name}: (#{songUpdate.song.album.name} from #{songUpdate.song.artist.name})"</a><br/>
+    <a href="#{songUpdate.song.link}">Song #{songUpdate.song.name}: (#{songUpdate.song.album.name} from #{songUpdate.song.artist.name})</a><br/>
     <h:outputText value="Styles: "/>
     <ol>
         <ui:repeat value="#{songUpdate.stylesList}" var="style">
@@ -23,7 +23,7 @@
         <h:commandButton value="update" action="#{songUpdate.updateSongLink()}">
             <f:param name="songId" value="#{songUpdate.song.id}" />
         </h:commandButton>
-        <h:outputText value="Link was updated by another user moments ago. please refresh and try again" rendered="#{param['error'] == 'optimistic-lock-exception'}" />
+        <h:outputText value="#{errorMessages.errorMessage()}" rendered="#{param['error'] == 'optimistic-lock-exception'}" />
     </h:form><h:form>
     <h:outputText value="#{checkIfSongExists.checkingStatus}" />
     <h:commandButton value="Check song link in databse" disabled="#{checkIfSongExists.taskRunning}" action="#{checkIfSongExists.checkIfExists()}">

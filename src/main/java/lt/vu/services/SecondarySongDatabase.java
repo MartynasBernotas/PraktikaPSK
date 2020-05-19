@@ -1,15 +1,19 @@
 package lt.vu.services;
 
+import lt.vu.interceptors.LoggedInvocation;
+
 import javax.enterprise.context.ApplicationScoped;
-import java.io.Serializable;
+import javax.enterprise.inject.Alternative;
 
 @ApplicationScoped
-public class SongsDatabaseTool implements Serializable {
+@Alternative
+public class SecondarySongDatabase implements ISongsDatabase {
+    @LoggedInvocation
     public Boolean checkSongExistence() {
         try {
             Thread.sleep(2000); // Simulate intensive work
         } catch (InterruptedException e) {
         }
-        return true;
+        return false;
     }
 }
