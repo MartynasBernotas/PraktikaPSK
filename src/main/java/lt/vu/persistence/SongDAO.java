@@ -5,7 +5,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.List;
-import javax.persistence.LockModeType;
 
 @ApplicationScoped
 public class SongDAO {
